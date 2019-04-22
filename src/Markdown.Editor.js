@@ -841,7 +841,6 @@
             this.start = chunk.before.length;
             this.end = chunk.before.length + chunk.selection.length;
             this.text = chunk.before + chunk.selection + chunk.after;
-            console.log("AIIIIIICIII", this.text);
             this.scrollTop = chunk.scrollTop;
         };
         this.init();
