@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.oxygenxml</groupId>
+		<artifactId>oxygen-feedback-superpom</artifactId>
+		<version>0.5-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>oxygen-feedback-editor</artifactId>
+	<name>Oxygen Feedback Editor</name>
+	<description>Oxygen Feedback module for the editor user in the comments app.</description>
+
+	<packaging>pom</packaging>
+
+	<properties>
+		<skip.unit.test>false</skip.unit.test>
+	</properties>
+
+	<build>
+		<plugins>
+			<!-- 
+				Build the zip with the javascript.
+			-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>package</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<descriptor>assembly.xml</descriptor>
+						</configuration>
+					</execution>				
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
