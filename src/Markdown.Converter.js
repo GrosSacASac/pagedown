@@ -527,7 +527,6 @@ else
             // These are all the transformations that occur *within* block-level
             // tags like paragraphs, headers, and list items.
             //
-
             text = pluginHooks.preSpanGamut(text);
             
             text = _DoCodeSpans(text);
@@ -542,8 +541,13 @@ else
             // Make links out of things like `<http://example.com/>`
             // Must come after _DoAnchors(), because you can use < and >
             // delimiters in inline links like [this](<url>).
-            text = _DoAutoLinks(text);
-            
+
+
+            // oXygen Feedback start patch
+            // remove link creation for <http://example.com>
+            // text = _DoAutoLinks(text);
+            // oXygen Feedback end patch
+
             text = text.replace(/~P/g, "://"); // put in place to prevent autolinking; reset now
             
             text = _EncodeAmpsAndAngles(text);
@@ -580,10 +584,19 @@ else
         }
 
         function _DoAnchors(text) {
-            
+
+            // oXygen Feedback start patch
+            // put target=_blank for <a> html elements
+            var anchors = text.match(/<a href="[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)*[\]$]+">/g);
+            for(var i = 0; i<anchors.length; i++) {
+                var updatedAnchor = anchors[i].replace(">", " target=\"_blank\">");
+                text = text.replace(anchors[i], updatedAnchor);
+            }
+            // oXygen Feedback end patch
+
             if (text.indexOf("[") === -1)
                 return text;
-            
+
             //
             // Turn Markdown link shortcuts into XHTML <a> tags.
             //
@@ -709,7 +722,10 @@ else
             }
             url = attributeSafeUrl(url);
 
-            var result = "<a href=\"" + url + "\"";
+            // oXygen Feedback start patch
+            // put target=_blank for <a> html elements
+            var result = "<a href=\"" + url + "\" target=\"_blank\"";
+            // oXygen Feedback end patch
 
             if (title != "") {
                 title = attributeEncode(title);
@@ -1507,7 +1523,6 @@ else
             text = deasciify(text)
             //  autolink anything like <http://example.com>
             
-
             var replacer = function (wholematch, m1) {
                 var url = attributeSafeUrl(m1);
                 
