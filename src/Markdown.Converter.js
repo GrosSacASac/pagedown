@@ -588,7 +588,7 @@ else
             // oXygen Feedback start patch
             // put target=_blank for <a> html elements
             var anchors = text.match(/<a href="[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)*[\]$]+">/g);
-            for(var i = 0; i<anchors.length; i++) {
+            for(var i = 0; anchors !== null && i<anchors.length; i++) {
                 var updatedAnchor = anchors[i].replace(">", " target=\"_blank\">");
                 text = text.replace(anchors[i], updatedAnchor);
             }
