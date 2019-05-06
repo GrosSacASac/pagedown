@@ -23,8 +23,8 @@
     var basic_tag_whitelist = /^(<\/?(b|blockquote|code|del|dd|dl|dt|em|h1|h2|h3|i|kbd|li|ol(?: start="\d+")?|p|pre|s|sup|sub|strong|strike|ul)>|<(br|hr)\s?\/?>)$/i;
     // <a href="url..." optional title>|</a>
     // oXygen Feedback start patch
-    // remove the ftp protocol
-    var a_white = /^(<a\shref="((https?):\/\/)[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)*[\]$]+"(\stitle="[^"<>]+")?\s?>|<\/a>)$/i;
+    // remove the ftp protocol and add the targe="_blank" attribute
+    var a_white = /^(<a\shref="((https?):\/\/)[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)*[\]$]+"(\stitle="[^"<>]+")?(\starget="_blank")\s?>|<\/a>)$/i;
     // oXygen Feedback start patch
     
     // <img src="url..." optional width  optional height  optional alt  optional title
