@@ -19,6 +19,9 @@
     "bugs": "http://code.google.com/p/pagedown/issues/list",
     "homepage": "http://code.google.com/p/pagedown/wiki/PageDown",
     "devDependencies": {
+        "babel-preset-env": "^1.7.0",
+        "babel-preset-react": "^6.24.1",
+        "babel-preset-stage-1": "^6.24.1",
         "jest": "^23.6.0",
         "jest-junit": "^5.2.0",
         "enzyme": "^3.7.0",
