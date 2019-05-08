@@ -18,6 +18,36 @@
 	<properties>
 		<skip.unit.test>false</skip.unit.test>
 	</properties>
+	
+	<profiles>
+		<profile>
+			<id>windows</id>
+			<activation>
+				<os>
+					<family>windows</family>
+				</os>
+			</activation>
+			<properties>
+				<npm.install.executable>cmd</npm.install.executable>
+				<npm.install.command>/c npm install</npm.install.command>
+				<npm.test.command>/c npm run test</npm.test.command>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>linux</id>
+			<activation>
+				<os>
+					<family>linux</family>
+				</os>
+			</activation>
+			<properties>
+				<npm.install.executable>npm</npm.install.executable>
+				<npm.install.command>install</npm.install.command>
+				<npm.test.command>run test</npm.test.command>
+			</properties>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>
@@ -38,6 +68,50 @@
 							<descriptor>assembly.xml</descriptor>
 						</configuration>
 					</execution>				
+				</executions>
+			</plugin>
+			
+			<!-- 
+				1. Runs npm install
+				2. Runs npm run dev
+			-->
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>npm-run</id>
+						<phase>generate-resources</phase>
+						<configuration>
+							<failOnError>true</failOnError>
+							<target>
+								<exec executable="${npm.install.executable}" failonerror="true"
+									dir="${project.basedir}">
+									<arg line="${npm.install.command}" />
+								</exec>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>npm-run-test</id>
+						<phase>test</phase>
+						<configuration>
+							<failOnError>true</failOnError>
+							<target unless="${skip.unit.test}">
+
+								<exec executable="${npm.install.executable}" failonerror="true"
+									  dir="${project.basedir}">
+									<arg line="${npm.test.command}" />
+								</exec>
+
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
