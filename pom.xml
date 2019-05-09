@@ -17,6 +17,7 @@
 
 	<properties>
 		<skip.unit.test>false</skip.unit.test>
+		<sonar.sources>src</sonar.sources>
 	</properties>
 	
 	<profiles>
