@@ -81,6 +81,12 @@ describe('CommentEditor', () => {
         expect(text).toEqual(`----------\n`);
     });
 
+    it("Insert text with new line", () => {
+        const converter = getSanitizingConverter();
+        const text = converter.makeHtml("Test\nText");
+        expect(text).toEqual("<p>Test <br>\nText</p>");
+    });
+
     afterEach(() => {
         document.getElementById('wmd-input').value = "";
     });

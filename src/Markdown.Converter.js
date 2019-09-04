@@ -554,7 +554,10 @@ else
             text = _DoItalicsAndBold(text);
 
             // Do hard breaks:
-            text = text.replace(/  +\n/g, " <br>\n");
+            // oXygen Feedback start patch
+            // Make a new line if a \n is encountered.
+            text = text.replace(/\n/g, " <br>\n");
+            // oXygen Feedback end patch
             
             text = pluginHooks.postSpanGamut(text);
 
