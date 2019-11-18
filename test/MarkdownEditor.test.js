@@ -87,6 +87,19 @@ describe('CommentEditor', () => {
         expect(text).toEqual("<p>Test <br>\nText</p>");
     });
 
+    it("Check error is shown for http images that are trying to be loaded over HTTPS ", () => {
+        delete global.window.location;
+        global.window.location = new URL("https://www.dummy.com/");
+        
+        const renderConverter = getSanitizingConverter();
+        let text = renderConverter.makeHtml("Test <img src=\"http://test.com\">");
+        expect(text).toEqual("<p>Test </p>");
+
+        const previewConverter = getSanitizingConverter("preview", {IMAGE_ERROR_MESSAGE: "Error message"});
+        text = previewConverter.makeHtml("Test <img src=\"http://test.com\">");
+        expect(text).toEqual("<p>Test <br /> <b> Error message</b> <br /></p>");
+    });
+
     afterEach(() => {
         document.getElementById('wmd-input').value = "";
     });

@@ -7,9 +7,26 @@
         output = window.Markdown;
         Converter = output.Converter;
     }
-        
-    output.getSanitizingConverter = function () {
+    
+    // The mode on which the sanitization applies. It may be at preview or at render.
+    var sanitizeMode = null;
+
+    // Object that holds error messages.
+    var SanitizationErrorMessages = null;
+
+    var img_white = null;
+
+    output.getSanitizingConverter = function (providedSanitizeMode, ProvidedSanitizationErrorMessages) {
         var converter = new Converter();
+        sanitizeMode = providedSanitizeMode;
+        SanitizationErrorMessages = ProvidedSanitizationErrorMessages;
+
+        // <img src="url..." optional width  optional height  optional alt  optional title
+        img_white = /^(<img\ssrc="(https?:\/\/)[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)*[\]$]+"(\swidth="\d{1,3}")?(\sheight="\d{1,3}")?(\salt="[^"<>]*")?(\stitle="[^"<>]*")?\s?\/?>)$/i;
+        if(location.protocol === "https:") {
+            img_white = /^(<img\ssrc="(https:\/\/)[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)*[\]$]+"(\swidth="\d{1,3}")?(\sheight="\d{1,3}")?(\salt="[^"<>]*")?(\stitle="[^"<>]*")?\s?\/?>)$/i;
+        }
+
         converter.hooks.chain("postConversion", sanitizeHtml);
         converter.hooks.chain("postConversion", balanceTags);
         return converter;
@@ -27,13 +44,16 @@
     var a_white = /^(<a\shref="((https?):\/\/)[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)*[\]$]+"(\stitle="[^"<>]+")?(\starget="_blank")\s?>|<\/a>)$/i;
     // oXygen Feedback start patch
     
-    // <img src="url..." optional width  optional height  optional alt  optional title
-    var img_white = /^(<img\ssrc="(https?:\/\/)[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)*[\]$]+"(\swidth="\d{1,3}")?(\sheight="\d{1,3}")?(\salt="[^"<>]*")?(\stitle="[^"<>]*")?\s?\/?>)$/i;
+    var img = /<img/;
 
     function sanitizeTag(tag) {
-        if (tag.match(basic_tag_whitelist) || tag.match(a_white) || tag.match(img_white))
+        if (tag.match(basic_tag_whitelist) || tag.match(a_white) || tag.match(img_white)) {
             return tag;
-        else {
+        } else {
+            if(tag.match(img) && location.protocol === "https:" && sanitizeMode === "preview" && SanitizationErrorMessages != null) {
+                // Insecure image detected, it may contain malicious code or it doesn't reference a link under HTTPS protocol
+                return "<br /> <b> " + SanitizationErrorMessages.IMAGE_ERROR_MESSAGE +  "</b> <br />";
+            }
             var anyChange = false;
             // if it looks like it *might* be valid, then try percent-encoding illegal characters in the src or href attribute
             // and then try the whitelist again -- if that fixes it, then replace the found tag with the fixed one.
@@ -50,6 +70,7 @@
             if (anyChange && (encoded.match(a_white) || encoded.match(img_white)))
                 return encoded;
         }
+
         return "";
     }
 
