@@ -44,7 +44,7 @@
     var a_white = /^(<a\shref="((https?):\/\/)[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)*[\]$]+"(\stitle="[^"<>]+")?(\starget="_blank")\s?>|<\/a>)$/i;
     // oXygen Feedback start patch
     
-    var img = /<img/;
+    var img = /<img src="http:/;
 
     function sanitizeTag(tag) {
         if (tag.match(basic_tag_whitelist) || tag.match(a_white) || tag.match(img_white)) {
