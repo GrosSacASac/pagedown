@@ -18,6 +18,12 @@
 	<properties>
 		<skip.unit.test>false</skip.unit.test>
 		<sonar.sources>src</sonar.sources>
+        <sonar.exclusions>
+            <!-- JavaScript libraries -->
+            src/Markdown.Converter.js,
+            src/Markdown.Editor.js,
+            src/Markdown.Sanitizer.js
+        </sonar.exclusions>
 	</properties>
 	
 	<profiles>
