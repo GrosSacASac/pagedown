@@ -23,9 +23,12 @@ describe('CommentEditor', () => {
     });
 
     it("Click bold button", () => {
-        document.getElementById('wmd-bold-button').click();
+		document.getElementById('wmd-input').value = "some text";
+		document.getElementById('wmd-input').select();
+		
+        document.getElementById('wmd-bold-button').click();		
         const text = document.getElementById('wmd-input').value;
-        expect(text).toEqual("**strong text**");
+        expect(text).toEqual("**some text**");
     });
 
     it("Click italic button", () => {
