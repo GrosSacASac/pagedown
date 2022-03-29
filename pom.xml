@@ -69,6 +69,12 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>6.1.2</version>
+			</plugin>
+		
 			<!-- 
 				Build the zip with the javascript.
 			-->
