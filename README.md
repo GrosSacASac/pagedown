@@ -15,13 +15,11 @@ In the demo/ folder, it also include usage examples. To see the editor at work, 
 
 The easiest way to get the Markdown converter working in node.js is by getting it [through npm](https://npmjs.org/package/pagedown).
 
-```
-$ npm install pagedown
-$ node
-```
+
+[npm i @grossacasacs/pagedown](https://www.npmjs.com/package/@grossacasacs/pagedown)
 
 ```js
-var pagedown = require("pagedown");
+var pagedown = require("@grossacasacs/pagedown");
 var converter = new pagedown.Converter();
 var safeConverter = pagedown.getSanitizingConverter();
 converter.makeHtml("hello")
@@ -53,9 +51,9 @@ document.write(converter.makeHtml("**I am bold!**"));
 
 The constructor optionally takes an `OPTIONS` object as an argument.
 
-The only currently recognized option is `OPTIONS.nonAsciiLetters`. If this is truthy, the converter will work around JavaScript's lack of unicode support in regular expressions when handling bold and italic. For example, since intra-word emphasis is prevented, the asterisks in `w**or**d` will not cause bolding. However without the workaround, the same is not true if the letters are outside the ASCII range: `с**ло́в**о` will cause the middle part of the word to be bolded.
+The only currently recognized option is `OPTIONS.nonAsciiLetters`. If this is truthy, the converter will work around JavaScript's lack of Unicode support in regular expressions when handling bold and italic. For example, since intra-word emphasis is prevented, the asterisks in `w**or**d` will not cause bolding. However without the workaround, the same is not true if the letters are outside the ASCII range: `с**ло́в**о` will cause the middle part of the word to be bolded.
 
-If the workaround is enabled, latin and cyrillic will behave identically here.
+If the workaround is enabled, latin and Cyrillic will behave identically here.
 
 `Markdown.HookCollection` is a constructor that creates a very simple plugin hook collection. You can usually ignore it; it's exported because the Markdown Editor (see below) uses it as well.
 
@@ -74,7 +72,7 @@ console.log(converter.makeHtml("**I am bold!**"));
 
 In a browser environment, this file has to be included after including Markdown.Converter.js. It adds a function named `getSanitizingConverter` to the `Markdown` object (created in the previous file).
 
-This function returns a converter object that has two plugins registered on the `postConversion` plugin hook. One of them sanitizes the output HTML to only include a list of whitelisted HTML tags. The other one attempts to balance opening/closing tags to prevent leaking formating if the HTML is displayed in the browser.
+This function returns a converter object that has two plugins registered on the `postConversion` plugin hook. One of them sanitizes the output HTML to only include a list of whitelisted HTML tags. The other one attempts to balance opening/closing tags to prevent leaking formatting if the HTML is displayed in the browser.
 
 ```js
 var converter = getSanitizingConverter();
@@ -142,7 +140,7 @@ converter.hooks.chain("preConversion", function (text) {
 
 `postConversion`
 
-Called with the HTML that was created from the Markdown source. The return value of this hook is the actual output that will then be returned from `makeHtml`. This is where `getSanitizingConverter` (see above) registers the tag sanitzer and balancer. Fine to chain.
+Called with the HTML that was created from the Markdown source. The return value of this hook is the actual output that will then be returned from `makeHtml`. This is where `getSanitizingConverter` (see above) registers the tag sanitizer and balancer. Fine to chain.
 
 ```js
 converter.hooks.chain("postConversion", function (text) { 
@@ -175,13 +173,13 @@ Called with the Markdown source after normalization. This includes things like c
 
 `preBlockGamut` **and** `postBlockGamut`
 
-The above warning about understandind the inner workings of PageDown goes doubly with these two hooks. They are the most powerful ones.
+The above warning about understanding the inner workings of PageDown goes doubly with these two hooks. They are the most powerful ones.
 
 Called with the text before or after creating block elements like code blocks and lists. Fine to chain. Note that this is called recursively with inner content, e.g. it's called with the full text, and then only with the content of a blockquote. The inner call will receive outdented text
 
 If you are creating a new kind of block-level structure that can include other Markdown blocks (say, you're reimplementing block quote), you will need to run the full block gamut again on the contents of your block. For this purpose, these two plugin hooks receive a second argument, which is a function that will do just that. Be aware that from within that function, your plugin will of course be called again, so make sure you're not creating ambiguity that leads to infinite recursion.
 
-As a contrived and simplified expample, let's say you're inventing fenced blockquotes, where blocks that are surrounded by lines with three quote characters in them are turned into block quotes. Such a thing could look like this:
+As a contrived and simplified example, let's say you're inventing fenced blockquotes, where blocks that are surrounded by lines with three quote characters in them are turned into block quotes. Such a thing could look like this:
 
 ```js
 converter.hooks.chain("preBlockGamut", function (text, runBlockGamut) {
@@ -228,7 +226,7 @@ editor.hooks.chain("postBlockquoteCreation", function (text) {
 
 `insertImageDialog`
 
-When the user clicks the "add image" button, they usually get a little dialog to enter the URL of an image. If you want a different behavior (like, in the case of Stack Exchange, a dialog to upload an image), register a plugin on this hook that returns `true` (this tells the editor not to create its own dialog and instead wait for you). The function is called with a single argument, which is a callback that you should call with the URL of the to-be-inserted image, or `null` if the user cancelled.
+When the user clicks the "add image" button, they usually get a little dialog to enter the URL of an image. If you want a different behaviour (like, in the case of Stack Exchange, a dialog to upload an image), register a plugin on this hook that returns `true` (this tells the editor not to create its own dialog and instead wait for you). The function is called with a single argument, which is a callback that you should call with the URL of the to-be-inserted image, or `null` if the user cancelled.
 
 It does not make sense to chain functions on this hook.
 
