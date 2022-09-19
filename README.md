@@ -1,15 +1,15 @@
 ## Introduction
-PageDown is the JavaScript [Markdown](http://daringfireball.net/projects/markdown/) previewer used on [Stack Overflow](http://stackoverflow.com/) and the rest of the [Stack Exchange network](http://stackexchange.com/). It includes a Markdown-to-HTML converter and an in-page Markdown editor with live preview.
+PageDown is the JavaScript [Markdown](https://daringfireball.net/projects/markdown/) previewer used on [Stack Overflow](https://stackoverflow.com/) and the rest of the [Stack Exchange network](https://stackexchange.com/). It includes a Markdown-to-HTML converter and an in-page Markdown editor with live preview.
 
-While on the Stack Exchange sites PageDown is exclusively used on the client site (on the server side, [MarkdownSharp](http://code.google.com/p/markdownsharp/) is our friend), PageDown's converter also works in a server environment. So if your Node.JS application lets users enter Markdown, you can also use PageDown to convert it to HTML on the server side.
+While on the Stack Exchange sites PageDown is exclusively used on the client site (on the server side, [MarkdownSharp](https://code.google.com/p/markdownsharp/) is our friend), PageDown's converter also works in a server environment. So if your Node.JS application lets users enter Markdown, you can also use PageDown to convert it to HTML on the server side.
 
-The largest part is based on work by John Fraser, a.k.a. Attacklab. He created the converter under the name **Showdown** and the editor under the name **WMD**. See [this post on the Stack Exchange blog](http://blog.stackoverflow.com/2008/12/reverse-engineering-the-wmd-editor/) for some historical information.
+The largest part is based on work by John Fraser, a.k.a. Attacklab. He created the converter under the name **Showdown** and the editor under the name **WMD**. See [this post on the Stack Exchange blog](https://blog.stackoverflow.com/2008/12/reverse-engineering-the-wmd-editor/) for some historical information.
 
 Over the years, we (the Stack Exchange team and others) have made quite a few changes, bug fixes etc., which is why we decided to publish the whole thing under a new name. This is not to mean we want to deprive John Fraser of any credits; he deserves lots. And you'll still be finding the letters "wmd" in a few places.
 
 It should be noted that Markdown is **not safe as far as user-entered input goes**. Pretty much anything is valid in Markdown, in particular something like `<script>doEvil();</script>`. This PageDown repository includes the two plugins that Stack Exchange uses to sanitize the user's input; see the description of Markdown.Sanitizer.js below.
 
-In the demo/ folder, it also include usage examples. To see the editor at work, open demos/browsers/demo.html in your browser. To see the server side version at work, go to the demos/node folder and run `node demo.js`, then navigate your browser to http://localhost:8000.
+In the demo/ folder, it also include usage examples. To see the editor at work, open demos/browsers/demo.html in your browser. To see the server side version at work, go to the demos/node folder and run `node demo.js`, then navigate your browser to https://localhost:8000.
 
 ### node.js and npm
 
@@ -236,7 +236,7 @@ editor.hooks.set("insertImageDialog", function (callback) {
   setTimeout(function () {
     var prompt = "We have detected that you like cats. Do you want to insert an image of a cat?"; 
     if (confirm(prompt))
-      callback("http://icanhascheezburger.files.wordpress.com/2007/06/schrodingers-lolcat1.jpg") 
+      callback("https://icanhascheezburger.files.wordpress.com/2007/06/schrodingers-lolcat1.jpg") 
     else
       callback(null);
     }, 2000);
@@ -249,7 +249,7 @@ Note that you cannot call the callback directly from the hook; you have to wait 
 ```js
 editor.hooks.set("insertImageDialog", function (callback) {
   setTimeout(function () { 
-    callback("http://example.com/image.jpg"); 
+    callback("https://example.com/image.jpg"); 
   }, 0);
   
   return true; 

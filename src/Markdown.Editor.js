@@ -38,7 +38,7 @@
 
         link: "Hyperlink <a> Ctrl+L",
         linkdescription: "enter link description here",
-        linkdialog: "<p><b>Insert Hyperlink</b></p><p>http://example.com/ \"optional title\"</p>",
+        linkdialog: "<p><b>Insert Hyperlink</b></p><p>https://example.com/ \"optional title\"</p>",
 
         quote: "Blockquote <blockquote> Ctrl+Q",
         quoteexample: "Blockquote",
@@ -48,7 +48,7 @@
 
         image: "Image <img> Ctrl+G",
         imagedescription: "enter image description here",
-        imagedialog: "<p><b>Insert Image</b></p><p>http://example.com/images/diagram.jpg \"optional title\"</p>",
+        imagedialog: "<p><b>Insert Image</b></p><p>https://example.com/images/diagram.jpg \"optional title\"</p>",
 
         olist: "Numbered List <ol> Ctrl+O",
         ulist: "Bulleted List <ul> Ctrl+U",
@@ -79,8 +79,8 @@
 
     // The default text that appears in the dialog input box when entering
     // links.
-    var imageDefaultText = "http://";
-    var linkDefaultText = "http://";
+    var imageDefaultText = "https://";
+    var linkDefaultText = "https://";
 
     // -------------------------------------------------------------------
     //  END OF YOUR CHANGES
@@ -258,7 +258,7 @@
         var regexText;
         var replacementText;
 
-        // chrome bug ... documented at: http://meta.stackexchange.com/questions/63307/blockquote-glitch-in-editor-in-chrome-6-and-7/65985#65985
+        // chrome bug ... documented at: https://meta.stackexchange.com/questions/63307/blockquote-glitch-in-editor-in-chrome-6-and-7/65985#65985
         if (navigator.userAgent.match(/Chrome/)) {
             "X".match(/()./);
         }
@@ -1125,9 +1125,9 @@
             }
             else {
                 // Fixes common pasting errors.
-                text = text.replace(/^http:\/\/(https?|ftp):\/\//, '$1://');
-                if (!/^(?:https?|ftp):\/\//.test(text))
-                    text = 'http://' + text;
+                text = text.replace(/^http:\/\/(https?):\/\//, '$1://');
+                if (!/^(?:https?):\/\//.test(text))
+                    text = 'https://' + text;
             }
 
             dialog.parentNode.removeChild(dialog);
@@ -1693,7 +1693,7 @@
         // if the match at its offset was in fact rendered as a link or image.
         var complete = chunk.before + chunk.selection + chunk.after;
         var rendered = this.converter.makeHtml(complete);
-        var testlink = "http://this-is-a-real-link.biz/";
+        var testlink = "https://this-is-a-real-link.biz/";
         
         // If our fake link appears in the rendered version *before* we have added it,
         // this probably means you're a Meta Stack Exchange user who is deliberately
@@ -1944,7 +1944,7 @@
                     // oXygen Feedback start patch
                     // Do not show the dialog when you insert a link. 
                     // ui.prompt(this.getString("linkdialog"), linkDefaultText, this.getString("ok"), this.getString("cancel"), linkEnteredCallback);
-                    linkEnteredCallback("http://");
+                    linkEnteredCallback("https://");
                     // oXygen Feedback end patch
             }
             return true;
@@ -2039,7 +2039,7 @@
         //
         // Since this is essentially a backwards-moving regex, it's susceptible to
         // catstrophic backtracking and can cause the browser to hang;
-        // see e.g. http://meta.stackexchange.com/questions/9807.
+        // see e.g. https://meta.stackexchange.com/questions/9807.
         //
         // Hence we replaced this by a simple state machine that just goes through the
         // lines and checks for a), b), and c).

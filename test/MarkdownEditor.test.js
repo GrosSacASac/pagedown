@@ -40,7 +40,7 @@ describe('CommentEditor', () => {
     it("Click link button", () => {
         document.getElementById('wmd-link-button').click();
         const text = document.getElementById('wmd-input').value;
-        expect(text).toEqual(`[enter link description here][1]\n\n\n  [1]: http://`);
+        expect(text).toEqual(`[enter link description here][1]\n\n\n  [1]: https://`);
     });
 
     it("Click quote button", () => {
@@ -95,11 +95,11 @@ describe('CommentEditor', () => {
         global.window.location = new URL("https://www.dummy.com/");
         
         const renderConverter = getSanitizingConverter();
-        let text = renderConverter.makeHtml("Test <img src=\"http://test.com\">");
+        let text = renderConverter.makeHtml("Test <img src=\"https://test.com\">");
         expect(text).toEqual("<p>Test </p>");
 
         const previewConverter = getSanitizingConverter("preview", {IMAGE_ERROR_MESSAGE: "Error message"});
-        text = previewConverter.makeHtml("Test <img src=\"http://test.com\">");
+        text = previewConverter.makeHtml("Test <img src=\"https://test.com\">");
         expect(text).toEqual("<p>Test <br /> <b> Error message</b> <br /></p>");
     });
 

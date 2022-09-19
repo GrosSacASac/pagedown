@@ -13,7 +13,7 @@
 
         link: "Hyperlien <a> Ctrl+L",
         linkdescription: "description de l'hyperlien",
-        linkdialog: "<p><b>Insérer un hyperlien</b></p><p>http://example.com/ \"titre optionnel\"</p>",
+        linkdialog: "<p><b>Insérer un hyperlien</b></p><p>https://example.com/ \"titre optionnel\"</p>",
 
         quote: "Citation <blockquote> Ctrl+Q",
         quoteexample: "Citation",
@@ -23,7 +23,7 @@
 
         image: "Image <img> Ctrl+G",
         imagedescription: "description de l'image",
-        imagedialog: "<p><b>Insérer une image</b></p><p>http://example.com/images/diagram.jpg \"titre optionnel\"<br><br><a href='http://www.google.com/search?q=free+image+hosting' target='_blank'>Vous chercher un hébergement d'image grauit ?</a></p>",
+        imagedialog: "<p><b>Insérer une image</b></p><p>https://example.com/images/diagram.jpg \"titre optionnel\"<br><br><a href='https://www.google.com/search?q=free+image+hosting' target='_blank'>Vous chercher un hébergement d'image grauit ?</a></p>",
 
         olist: "Liste numérotée <ol> Ctrl+O",
         ulist: "Liste à point <ul> Ctrl+U",

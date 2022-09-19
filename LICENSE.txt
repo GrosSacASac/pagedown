@@ -4,7 +4,7 @@ and the rest of Stack Exchange network.
 Largely based on showdown.js by John Fraser (Attacklab).
 
 Original Markdown Copyright (c) 2004-2005 John Gruber
-  <http://daringfireball.net/projects/markdown/>
+  <https://daringfireball.net/projects/markdown/>
 
 
 Original Showdown code copyright (c) 2007 John Fraser

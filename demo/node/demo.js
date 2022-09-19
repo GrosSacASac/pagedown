@@ -24,7 +24,7 @@ http.createServer(function (req, res) {
     res.writeHead(200, { "Content-type": "text/html" });
     res.write("<html><body>");
     
-    var markdown = query.md || "## Hello!\n\n<marquee>I'm walking</marquee>\n\nVisit [Stack Overflow](http://stackoverflow.com)\n\n<b><i>This is never closed!";
+    var markdown = query.md || "## Hello!\n\n<marquee>I'm walking</marquee>\n\nVisit [Stack Overflow](https://stackoverflow.com)\n\n<b><i>This is never closed!";
 
     res.write("<h1>Your output, sanitized:</h1>\n" + saneConv.makeHtml(markdown))
     res.write("<h1>Your output, unsanitized:</h1>\n" + conv.makeHtml(markdown))
