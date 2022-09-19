@@ -1,13 +1,10 @@
 {
-    "name": "pagedown",
-    "version": "1.1.0",
-    "description": "markdown converter, based on showdown",
-    "repository": {
-        "type": "hg",
-        "url": "https://code.google.com/p/pagedown/"
-    },
+    "name": "@grossacasacs/pagedown",
+    "version": "2.0.0",
+    "description": "markdown converter and editor, based on showdown",
     "keywords": [
-        "markdown"
+        "markdown",
+        "editor"
     ],
     "license": "MIT",
     "files": [
@@ -16,8 +13,6 @@
         "node-pagedown.js"
     ],
     "main": "node-pagedown.js",
-    "bugs": "http://code.google.com/p/pagedown/issues/list",
-    "homepage": "http://code.google.com/p/pagedown/wiki/PageDown",
     "devDependencies": {
         "@babel/core": "^7.6.3",
         "@babel/preset-env": "^7.6.3",
@@ -38,8 +33,7 @@
     },
     "babel": {
         "presets": [
-            "@babel/preset-env",
-            "@babel/preset-react"
+            "@babel/preset-env"
         ]
     }
 }
