@@ -1,6 +1,6 @@
 {
     "name": "@grossacasacs/pagedown",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "description": "markdown converter and editor, based on showdown",
     "license": "MIT",
     "type": "commonjs",
@@ -13,21 +13,6 @@
     },
     "dependencies": {},
     "devDependencies": {
-        "@babel/core": "^7.6.3",
-        "@babel/preset-env": "^7.6.3",
-        "@babel/preset-react": "^7.6.3",
-        "enzyme": "^3.10.0",
-        "enzyme-adapter-react-16": "^1.14.0",
-        "enzyme-to-json": "^3.4.0",
-        "jest": "^27.2.5",
-        "jest-junit": "^13.0.0",
-        "react": "^16.8.0",
-        "react-dom": "^16.8.0"
-    },
-    "babel": {
-        "presets": [
-            "@babel/preset-env"
-        ]
     },
     "files": [
         "src",
