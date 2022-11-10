@@ -84,7 +84,7 @@ selection), this editor creates an example text that's different from the first 
                 });
 
                 converter2.hooks.chain("plainLinkText", function (url) {
-                    return "This is a link to " + url.replace(/^https?:\/\//, "");
+                    return "This is a link to " + url.replace(/^https:\/\//, "");
                 });
                 
                 var help = function () { alert("Do you need help?"); }

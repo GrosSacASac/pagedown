@@ -1531,7 +1531,7 @@ else
                 
                 return "<a href=\"" + url + "\">" + pluginHooks.plainLinkText(m1) + "</a>";
             };
-            text = text.replace(/<((https?|ftp):[^'">\s]+)>/gi, replacer);
+            text = text.replace(/<((https):[^'">\s]+)>/gi, replacer);
 
             // Email addresses: <address@domain.foo>
             /*

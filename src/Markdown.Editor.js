@@ -1123,13 +1123,6 @@
             if (isCancel) {
                 text = null;
             }
-            else {
-                // Fixes common pasting errors.
-                text = text.replace(/^http:\/\/(https?):\/\//, '$1://');
-                if (!/^(?:https?):\/\//.test(text))
-                    text = 'https://' + text;
-            }
-
             dialog.parentNode.removeChild(dialog);
 
             callback(text);

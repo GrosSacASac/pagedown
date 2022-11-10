@@ -22,10 +22,7 @@
         SanitizationErrorMessages = ProvidedSanitizationErrorMessages;
 
         // <img src="url..." optional width  optional height  optional alt  optional title
-        img_white = /^(<img\ssrc="(https?:\/\/)[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)*[\]$]+"(\swidth="\d{1,3}")?(\sheight="\d{1,3}")?(\salt="[^"<>]*")?(\stitle="[^"<>]*")?\s?\/?>)$/i;
-        if(location.protocol === "https:") {
-            img_white = /^(<img\ssrc="(https:\/\/)[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)*[\]$]+"(\swidth="\d{1,3}")?(\sheight="\d{1,3}")?(\salt="[^"<>]*")?(\stitle="[^"<>]*")?\s?\/?>)$/i;
-        }
+        img_white = /^(<img\ssrc="(https:\/\/)[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)*[\]$]+"(\swidth="\d{1,3}")?(\sheight="\d{1,3}")?(\salt="[^"<>]*")?(\stitle="[^"<>]*")?\s?\/?>)$/i;
 
         converter.hooks.chain("postConversion", sanitizeHtml);
         converter.hooks.chain("postConversion", balanceTags);
@@ -41,7 +38,7 @@
     // <a href="url..." optional title>|</a>
     // oXygen Feedback start patch
     // remove the ftp protocol and add the targe="_blank" attribute
-    var a_white = /^(<a\shref="((https?):\/\/)[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)*[\]$]+"(\stitle="[^"<>]+")?(\starget="_blank")\s?>|<\/a>)$/i;
+    var a_white = /^(<a\shref="((https):\/\/)[-A-Za-z0-9+&@#\/%?=~_|!:,.;\(\)*[\]$]+"(\stitle="[^"<>]+")?(\starget="_blank")\s?>|<\/a>)$/i;
     // oXygen Feedback start patch
     
     var img = /<img src="http:/;

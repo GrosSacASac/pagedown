@@ -5,8 +5,8 @@
 var http = require("http"),
     url = require("url"),
     querystring = require("querystring"),
-    Converter = require("../../Markdown.Converter").Converter,
-    getSanitizingConverter = require("../../Markdown.Sanitizer").getSanitizingConverter,
+    Converter = require("../../src/Markdown.Converter.js").Converter,
+    getSanitizingConverter = require("../../src/Markdown.Sanitizer.js").getSanitizingConverter,
     conv = new Converter(),
     saneConv = getSanitizingConverter();
 
