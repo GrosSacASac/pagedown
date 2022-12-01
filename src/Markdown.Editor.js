@@ -98,9 +98,7 @@
     // to the user on a case-by-case basis, or translate all strings to
     // a different language.
     //
-    // For backwards compatibility reasons, the `options` argument can also
-    // be just the `helpButton` object, and `strings.help` can also be set via
-    // `helpButton.title`. This should be considered legacy.
+
     //
     // The constructed editor object has the methods:
     // - getConverter() returns the markdown converter object that was passed to the constructor
@@ -113,9 +111,6 @@
     // oXygen Feedback end patch
         options = options || {};
 
-        if (typeof options.handler === "function") { //backwards compatible behavior
-            options = { helpButton: options };
-        }
         options.strings = options.strings || {};
         if (options.helpButton) {
             options.strings.help = options.strings.help || options.helpButton.title;
